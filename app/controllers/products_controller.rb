@@ -15,18 +15,16 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
-    @categories = Category.order(:name)
   end
 
   # GET /products/1/edit
   def edit
-    @categories = Category.order(:name)
+   
   end
 
   # POST /products
   # POST /products.json
   def create
-    @categories = Category.order(:name)
     @product = Product.new(product_params)
 
     respond_to do |format|

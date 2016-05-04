@@ -1,0 +1,52 @@
+<h2 class="title_page">Your Cart</h2>
+
+
+	<% if user_signed_in? %>
+
+	<%else%>
+<div class="not_signed">
+	<p> You're not currently signed in. <strong><%=link_to "Sign in", new_user_session_path, class:"sign_in_link"%></strong> to save these items or see your saved items. </p>
+</div>
+	<%end%>
+
+	
+
+
+
+
+<% if @line_items.count == 0 %>
+<div class="nothing_cart">
+<strong>Your shopping cart is empty, but it doesn't have to be.</strong>
+<br />
+There are lots of great deals and one-of-a-kind items just waiting for you.
+</div>
+<% end %>
+
+
+
+
+
+<div class="row">
+    <% @line_items.each do |line_item| %>
+<div class="col-md-12">
+	<div class="well">
+	
+        <li class="product_name"><%= line_item.product.name %></li><li class="product_price"><%= number_to_currency line_item.product.price %></li>
+	<li class="product_quantity">Qty: <%= line_item.quantity %></li>
+	<li class="subtotal">Subtotal: <%= line_item.line_item_total %></li><p> <%= link_to '', line_item, method: :delete, data: { confirm: 'Are you sure?' }, class:"glyphicon glyphicon-trash" %> </p> 
+
+	</div>
+	</div>
+    <% end %>
+</div>
+
+
+
+
+<div class="checkout_options">
+
+
+	<%= link_to "Continue Shopping", root_path, class: "btn btn-success" %>
+    <%= link_to "Proceed to Checkout", checkout_path, class: "btn btn-success" %>
+
+</div>
